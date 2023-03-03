@@ -1,0 +1,4 @@
+###### Requirements without Version Specifiers ######
+jupyter
+
+###### Requirements with Version Specifiers ######
