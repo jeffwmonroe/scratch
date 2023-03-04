@@ -1,6 +1,10 @@
-print("---------------------")
-print("Welcome to Python")
-print("")
+import btree.node as node
+
+# from btree.node import Node, SearchOrder, SearchDirection
+
+# print("---------------------")
+# print("Welcome to Python")
+# print("")
 
 
 # todo Set up test suite
@@ -8,10 +12,13 @@ print("")
 
 
 def main():
-    print('inside of the main function')
+    # print('inside of the main function')
+    y = node.Node()
+    y.populate()
+    y.topdown()
+    y.traverse(node.SearchOrder.BreadthFirst, node.SearchDirection.RightToLeft)
 
 
 if __name__ == '__main__':
-    print('main being run')
+    # print('main being run')
     main()
-

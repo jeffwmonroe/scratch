@@ -1,5 +1,5 @@
-from btree.node import Node, SearchOrder, SearchDirection
+# from btree.node import Node, SearchOrder, SearchDirection
 
-print('initializing btree')
+# print('initializing btree')
 
 #todo Look into better initialization of the script

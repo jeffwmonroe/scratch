@@ -1,6 +1,6 @@
-from btree.stack import Stack, ListType
+from btree.deck import Deck, ListType
 from enum import Enum
-#todo need to implement a test suite
+
 
 class SearchDirection(Enum):
     LeftToRight = 1,
@@ -13,7 +13,12 @@ class SearchOrder(Enum):
 
 
 class Node:
-    def __init__(self, label: object = None, left: object = None, right: object = None) -> object:
+    def __init__(self, label: object = None, left: object = None, right: object = None):
+        """
+        ;type label: string
+        :type left: Node
+        :type right: Node
+        """
         # print("initializing node")
         self.left = left
         self.right = right
@@ -21,7 +26,7 @@ class Node:
 
     def topdown(self):
         """This is the recursive definition of the depth first search"""
-        print(f'label = {self.label}')
+        # print(f'label = {self.label}')
         if self.left is not None:
             self.left.topdown()
         if self.right is not None:
@@ -30,16 +35,19 @@ class Node:
     def traverse(self, order=SearchOrder.DepthFirst, direction=SearchDirection.LeftToRight):
         """THis is the non-resursive variant of the search function."""
         if order == SearchOrder.DepthFirst:
-            stack = Stack(ListType.Stack)
+            stack = Deck(ListType.Stack)
         else:
-            stack = Stack(ListType.Queue)
+            stack = Deck(ListType.Queue)
 
+        result = []
         stack.push(self)
         while True:
             val = stack.pop()
             if val is None:
                 break
-            print(f'label = {val.label}')
+            # print(f'label = {val.label}')
+            result[len(result):] = [val.label]
+
             search = (order, direction)
             right_first = True
             match search:
@@ -62,17 +70,4 @@ class Node:
                     stack.push(val.left)
                 if val.right is not None:
                     stack.push(val.right)
-
-#todo this needs to go into the test suite
-    def populate(self):
-        r31 = Node("r31")
-        r32 = Node("r32")
-        r33 = Node("r33")
-        r34 = Node("r34")
-
-        r21 = Node("r21", r31, r32)
-        r22: Node = Node("r22", r33, r34)
-
-        self.label = 'r11'
-        self.left = r21
-        self.right = r22
+        return result
